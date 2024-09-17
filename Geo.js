@@ -1,7 +1,7 @@
 function onLoad() {
     console.log("Page loaded");
-    navigator.geolocation.getCurrentPosition(afficherPosition, afficherPrecision, afficherVitesse, afficherDate);
-    navigator.geolocation.watchPosition(afficherPosition, afficherPrecision, afficherVitesse, afficherDate);
+    navigator.geolocation.getCurrentPosition(afficherPosition, afficherErreur);
+    navigator.geolocation.watchPosition(afficherPosition, afficherErreur);
     afficherDate(Date.now());
 }
 
@@ -14,6 +14,10 @@ function afficherPosition(position) {
     lat.textContent = `Latitude: ${latitude}`;
     alt.textContent = `Altitude: ${altitude}`;
     console.log(`Position : Longitude: ${longitude}, Latitude: ${latitude}, Altitude: ${altitude}`);
+
+    afficherPrecision(position);
+    afficherVitesse(position);
+    afficherDate(Date.now());
 }
 
 function afficherPrecision(position) {
@@ -35,4 +39,8 @@ function afficherDate(timestamp) {
     const datehtml = document.querySelector("#date");
     datehtml.textContent = `Date : ${date}`;
     console.log(`Date : ${date}`);
+}
+
+function afficherErreur(error) {
+    console.error(`Erreur de géolocalisation : ${error.message}`);
 }
