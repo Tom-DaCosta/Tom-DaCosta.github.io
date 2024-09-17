@@ -12,9 +12,9 @@ function afficherPosition(position) {
     const alt = document.querySelector("#alt");
     long.textContent = `Longitude: ${longitude}`;
     lat.textContent = `Latitude: ${latitude}`;
-    alt.textContent = `Altitude: ${altitude}`;
-    console.log(`Position : Longitude: ${longitude}, Latitude: ${latitude}, Altitude: ${altitude}`);
-
+    alt.textContent = altitude !== null ? `Altitude: ${altitude}` : "Altitude non disponible";
+    console.log(`Position : Longitude: ${longitude}, Latitude: ${latitude}, Altitude: ${altitude !== null ? altitude : "non disponible"}`);
+    
     afficherPrecision(position);
     afficherVitesse(position);
     afficherDate(Date.now());
