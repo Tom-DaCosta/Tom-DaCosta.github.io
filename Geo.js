@@ -7,10 +7,12 @@ function onLoad() {
 
 function afficherPosition(position) {
     const { longitude, latitude, altitude } = position.coords;
-    const long = document.querySelector("#longitude");
-    const lat = document.querySelector("#latitude");
-    const alt = document.querySelector("#altitude");
-    long.classList.add("position");
+    const long = document.querySelector("#long");
+    const lat = document.querySelector("#lat");
+    const alt = document.querySelector("#alt");
+    long.textContent = `Longitude: ${longitude}`;
+    lat.textContent = `Latitude: ${latitude}`;
+    alt.textContent = `Altitude: ${altitude}`;
     console.log(`Position : Longitude: ${longitude}, Latitude: ${latitude}, Altitude: ${altitude}`);
 }
 
