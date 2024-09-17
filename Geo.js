@@ -7,6 +7,10 @@ function onLoad() {
 
 function afficherPosition(position) {
     const { longitude, latitude, altitude } = position.coords;
+    const long = document.querySelector("#longitude");
+    const lat = document.querySelector("#latitude");
+    const alt = document.querySelector("#altitude");
+    long.classList.add("position");
     console.log(`Position : Longitude: ${longitude}, Latitude: ${latitude}, Altitude: ${altitude}`);
 }
 
