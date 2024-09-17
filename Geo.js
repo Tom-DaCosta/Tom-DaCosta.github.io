@@ -18,15 +18,21 @@ function afficherPosition(position) {
 
 function afficherPrecision(position) {
     const precision = position.coords.accuracy;
+    const prec = document.querySelector("#prec");
+    prec.textContent = `Précision de mesure : ${precision} mètres`;
     console.log(`Précision de mesure : ${precision} mètres`);
 }
 
 function afficherVitesse(position) {
     const vitesse = position.coords.speed;
+    const vit = document.querySelector("#vit");
+    vit.textContent = `Vitesse : ${vitesse} m/s`;
     console.log(`Vitesse : ${vitesse} m/s`);
 }
 
 function afficherDate(timestamp) {
     const date = new Date(timestamp);
+    const datehtml = document.querySelector("#date");
+    datehtml.textContent = `Date : ${date}`;
     console.log(`Date : ${date}`);
 }
