@@ -13,7 +13,7 @@ function onLoad() {
         var radius = e.accuracy / 2;
 
         L.marker(e.latlng).addTo(map)
-            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+            .bindPopup("Vous êtes à " + radius + " metres de ce point").openPopup();
 
         L.circle(e.latlng, radius).addTo(map);
     }
