@@ -21,7 +21,7 @@ directionalLight2.position.set(-5, -5, -5).normalize();
 scene.add(directionalLight);
 scene.add(directionalLight2);
 
-camera.position.z = 500;
+camera.position.z = 5;
 
 let gltfScene;
 
@@ -38,7 +38,7 @@ function animate() {
 }
 
 const loader = new GLTFLoader();
-loader.load('../../model/scene.gltf', function (gltf) {
+loader.load('./../../model/scene.gltf', function (gltf) {
     gltfScene = gltf.scene;
     scene.add(gltfScene);
 }, undefined, function (error) {
