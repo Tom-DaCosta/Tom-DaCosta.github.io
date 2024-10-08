@@ -38,7 +38,7 @@ function animate() {
 }
 
 const loader = new GLTFLoader();
-loader.load('./model/scene.gltf', function (gltf) {
+loader.load('../../model/scene.gltf', function (gltf) {
     gltfScene = gltf.scene;
     scene.add(gltfScene);
 }, undefined, function (error) {
