@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -21,9 +21,31 @@ directionalLight2.position.set(-5, -5, -5).normalize();
 scene.add(directionalLight);
 scene.add(directionalLight2);
 
-camera.position.z = 5;
+camera.position.z = 500;
 
 let gltfScene;
+
+const rainCount = 20000;
+const rainGeometry = new THREE.BufferGeometry();
+const rainVertices = [];
+
+for (let i = 0; i < rainCount; i++) {
+    const x = Math.random() * 2000 - 1000;
+    const y = Math.random() * 2500 - 1300;
+    const z = Math.random() * 2000 - 1000;
+    rainVertices.push(x, y, z);
+}
+
+rainGeometry.setAttribute('position', new THREE.Float32BufferAttribute(rainVertices, 3));
+
+const rainMaterial = new THREE.PointsMaterial({
+    color: 0xaaaaaa,
+    size: 0.1,
+    transparent: true
+});
+
+const rain = new THREE.Points(rainGeometry, rainMaterial);
+scene.add(rain);
 
 function animate() {
     cube.rotation.x += 0.01;
@@ -34,11 +56,21 @@ function animate() {
         gltfScene.rotation.y += 0.01;
     }
 
+    // Mise à jour des particules de pluie
+    const positions = rainGeometry.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i + 1] -= 0.2; // Déplacement vers le bas
+        if (positions[i + 1] < -200) {
+            positions[i + 1] = 200; // Réinitialisation de la position
+        }
+    }
+    rainGeometry.attributes.position.needsUpdate = true;
+
     renderer.render(scene, camera);
 }
 
 const loader = new GLTFLoader();
-loader.load('./../../model/scene.gltf', function (gltf) {
+loader.load('./model/scene.gltf', function (gltf) {
     gltfScene = gltf.scene;
     scene.add(gltfScene);
 }, undefined, function (error) {
